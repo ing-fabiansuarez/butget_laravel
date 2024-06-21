@@ -23,13 +23,14 @@ class SendVerificationMailAction
             throw new UserAlreadyVerifiedException();
         }
 
-        $differenceInSeconds = strtotime('now') - strtotime($user->last_verification_mail_sent_at);
+       /*  $differenceInSeconds = strtotime('now') - strtotime($user->last_verification_mail_sent_at);
 
         if ($user->last_verification_mail_sent_at && $differenceInSeconds < 300) {
+            dd("holi");
             throw new VerificationMailRateLimitException();
-        }
+        } */
 
-        Mail::to($user->email)->queue(new VerifyRegistration($user));
+        Mail::to($user->email)->send(new VerifyRegistration($user));
 
         $user->fill([
             'last_verification_mail_sent_at' => date('Y-m-d H:i:s')

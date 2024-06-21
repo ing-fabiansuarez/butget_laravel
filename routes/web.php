@@ -31,7 +31,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'store']);
 
-    Route::get('/verify/{token}', VerifyController::class)->name('verify');
+
 
     Route::get('/reset_password', [ResetPasswordController::class, 'get'])->name('reset_password');
     Route::post('/reset_password', [ResetPasswordController::class, 'post']);
@@ -126,6 +126,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('/logout', [LogoutController::class, 'index'])->name('logout');
+Route::get('/verify/{token}', VerifyController::class)->name('verify');
 
 Route::prefix('prototype')
     ->middleware(CheckIfSpaPrototypeIsEnabled::class)

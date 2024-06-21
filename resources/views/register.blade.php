@@ -11,7 +11,7 @@
             <form method="POST">
                 {{ csrf_field() }}
                 <div class="mb-5">
-                    <label class="block mb-1 text-sm text-gray-700">Name</label>
+                    <label class="block mb-1 text-sm text-gray-700">Nombre Completo</label>
                     <input class="w-full px-3 py-2 text-sm border rounded-md" type="text" name="name" value="{{ old('name') }}" />
                     @include('partials.validation_error', ['payload' => 'name'])
                 </div>
@@ -21,17 +21,17 @@
                     @include('partials.validation_error', ['payload' => 'email'])
                 </div>
                 <div class="mb-5">
-                    <label class="block mb-1 text-sm text-gray-700">Password</label>
+                    <label class="block mb-1 text-sm text-gray-700">Contraseña</label>
                     <input class="w-full px-3 py-2 text-sm border rounded-md" type="password" name="password" />
                     @include('partials.validation_error', ['payload' => 'password'])
                 </div>
                 <div class="mb-5">
-                    <label class="block mb-1 text-sm text-gray-700">Verify password</label>
+                    <label class="block mb-1 text-sm text-gray-700">Repetir Contraseña</label>
                     <input class="w-full px-3 py-2 text-sm border rounded-md" type="password" name="password_confirmation" />
                     @include('partials.validation_error', ['payload' => 'password_confirmation'])
                 </div>
                 <div class="mb-5">
-                    <label class="block mb-1 text-sm text-gray-700">Currency</label>
+                    <label class="block mb-1 text-sm text-gray-700">Moneda</label>
                     <select class="w-full px-3 py-2 text-sm border rounded-md appearance-none" name="currency">
                         @foreach ($currencies as $currency)
                             <option value="{{ $currency->id }}">{{ $currency->name }} ({!! $currency->symbol !!})</option>

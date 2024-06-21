@@ -77,9 +77,10 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'es',
 
     'locales' => [
+        'es' => 'Spanish',
         'en' => 'English',
         'nl' => 'Dutch',
         'dk' => 'Danish',

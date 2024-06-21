@@ -1,11 +1,11 @@
 @extends('emails.template')
 
 @section('content')
-    Welcome aboard, {{ $name }}
+    Bienvenido a bordo, {{ $name }}
 
-    We're going to help you get insight into your personal finances.
+    Vamos a ayudarte a conocer mejor tus finanzas personales.
 
-    No more dealing with pesky, half-assed spreadsheets.
+    Se acabó lidiar con molestas hojas de cálculo a medias.
 
-    <a href="{{ config('app.url') . '/verify/' . $verification_token }}">Verify</a>
+    <a href="{{ route('verify', $verification_token) }}">Verify</a>
 @endsection
