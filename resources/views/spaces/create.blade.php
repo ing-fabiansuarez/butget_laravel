@@ -14,6 +14,11 @@
                         <input type="text" name="name" />
                         @include('partials.validation_error', ['payload' => 'name'])
                     </div>
+                    <div class="input input--small">
+                        <label>{{ __('fields.color') }}</label>
+                        <color-picker></color-picker>
+                        @include('partials.validation_error', ['payload' => 'color'])
+                    </div>
                     <div class="input input--small mb-0">
                         <label>{{ __('fields.currency') }}</label>
                         <select name="currency_id">

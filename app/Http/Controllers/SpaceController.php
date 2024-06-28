@@ -28,10 +28,11 @@ class SpaceController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
+            'color' => 'required|max:6',
             'currency_id' => 'required|exists:currencies,id'
         ]);
 
-        (new CreateSpaceAction())->execute($request->name, $request->currency_id, Auth::id());
+        (new CreateSpaceAction())->execute($request->name, $request->currency_id, Auth::id(),$request->color);
 
         return redirect()->route('settings.spaces.index');
     }
@@ -63,11 +64,13 @@ class SpaceController extends Controller
         }
 
         $request->validate([
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'color' => 'required|max:6',
         ]);
 
         $space->fill([
-            'name' => $request->name
+            'name' => $request->name,
+            'color' => $request->color
         ])->save();
 
         return redirect()->route('settings.spaces.index');

@@ -11,6 +11,9 @@
         <ul class="box__section">
             @foreach ($spaces as $space)
                 <li class="row row--middle">
+                    <div class="row__column row__column--compact row__column--middle mr-2">
+                        <div style="width: 15px; height: 15px; border-radius: 2px; background: #{{ $space->color }};"></div>
+                    </div>
                     <div class="row__column" v-pre>{{ $space->name }} &middot; {{ ucfirst($space->pivot->role) }}</div>
                     <div class="row__column row__column--compact">
                         @can('edit', $space)

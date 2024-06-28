@@ -6,10 +6,11 @@ use App\Models\Space;
 
 class CreateSpaceAction
 {
-    public function execute(string $name, int $currencyId, int $creatorUserId): Space
+    public function execute(string $name, int $currencyId, int $creatorUserId, string $color = null): Space
     {
         $space = Space::create([
             'name' => $name,
+            'color' => $color,
             'currency_id' => $currencyId
         ]);
 
@@ -17,4 +18,5 @@ class CreateSpaceAction
 
         return $space;
     }
+
 }

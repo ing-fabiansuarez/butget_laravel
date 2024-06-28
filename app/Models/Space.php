@@ -16,7 +16,8 @@ class Space extends Model
 
     protected $fillable = [
         'currency_id',
-        'name'
+        'name',
+        'color'
     ];
 
     // Relations

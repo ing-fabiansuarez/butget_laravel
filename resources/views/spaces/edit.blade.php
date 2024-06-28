@@ -18,6 +18,11 @@
                             <input type="text" name="name" value="{{ $space->name }}" />
                         </div>
                         <div class="input input--small mb-0">
+                            <label>{{ __('fields.color') }}</label>
+                            <color-picker initial-color="{{ $space->color }}"></color-picker>
+                            @include('partials.validation_error', ['payload' => 'color'])
+                        </div>
+                        <div class="input input--small mb-0">
                             <label>{{ __('fields.currency') }}</label>
                             <select disabled>
                                 <option>{{ $space->currency->name }}</option>
@@ -28,7 +33,8 @@
                 </div>
             </div>
             <div class="row row--right mt-2">
-                <a class="button button--secondary mr-2" href="{{ route('settings.spaces.index') }}">{{ __('actions.cancel') }}</a>
+                <a class="button button--secondary mr-2"
+                    href="{{ route('settings.spaces.index') }}">{{ __('actions.cancel') }}</a>
                 <button class="button">{{ __('actions.save') }}</button>
             </div>
         </form>
@@ -59,7 +65,8 @@
                     @foreach ($space->invites as $i => $invite)
                         <div class="{{ $i > 0 ? 'mt-2' : '' }}">
                             <div class="color-dark mb-1" v-pre>{{ $invite->invitee->name }}</div>
-                            <div class="fs-sm" v-pre>{{ __('general.invited_by') }} {{ $invite->inviter->name }} &middot; {{ $invite->status }}</div>
+                            <div class="fs-sm" v-pre>{{ __('general.invited_by') }} {{ $invite->inviter->name }} &middot;
+                                {{ $invite->status }}</div>
                         </div>
                     @endforeach
                 </div>
@@ -75,15 +82,15 @@
                         @switch(session('inviteStatus'))
                             @case('success')
                                 <div class="color-green mb-2">An invite has been sent</div>
-                                @break
+                            @break
 
                             @case('present')
                                 <div class="color-red mb-2">User is already part of space</div>
-                                @break
+                            @break
 
                             @case('exists')
                                 <div class="color-red mb-2">Invite has already been sent</div>
-                                @break
+                            @break
                         @endswitch
                     @endif
                     <form method="POST" action="{{ route('spaces.invite', ['space' => $space->id]) }}">
