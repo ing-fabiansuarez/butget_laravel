@@ -61,7 +61,17 @@
                                             </div>
                                         @endif
                                     </div>
-                                    <div class="row__column row__column--compact w-50">
+                                    <div class="row__column">
+                                        @if ($transaction->happened_on)
+                                            <div class="row">
+                                                <div class="row__column row__column--compact row__column--middle mr-05" style="font-size: 12px;">
+                                                    <i class="fas fa-calendar" ></i>
+                                                </div>
+                                                <div class="row__column row__column--compact row__column--middle" v-pre>{{ $transaction->happened_on }}</div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="row__column row__column--compact w-20">
                                         @if ($transaction->recurring_id)
                                             <i class="fas fa-recycle"></i>
                                         @endif
