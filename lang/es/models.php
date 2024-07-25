@@ -23,5 +23,9 @@ return [
     'transaction' => 'Transacción',
 
     'imports' => 'Importes',
-    'import' => 'Importe'
+    'import' => 'Importe',
+
+    'debts' =>'Deudas',
+    'debt' =>'Deuda',
+
 ];

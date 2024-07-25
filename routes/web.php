@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DebtController;
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\IndexController;
@@ -78,6 +79,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/budgets', BudgetController::class)->only(['index', 'create', 'store']);
 
     Route::resource('/tags', TagController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+
+    Route::resource('/debts',DebtController::class);
 
     Route::name('reports.')->group(function () {
         Route::get('/reports', [ReportController::class, 'index'])->name('index');
