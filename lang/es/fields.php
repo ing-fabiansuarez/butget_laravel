@@ -27,5 +27,6 @@ return [
 
     'type'=>'Tipo',
     'due_date'=>'Fecha de vencimiento',
-    'Who'=>'¿Quien?'
+    'Who'=>'¿Quien?',
+    'who'=>'¿Quien?'
 ];

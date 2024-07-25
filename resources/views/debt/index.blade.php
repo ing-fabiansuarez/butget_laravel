@@ -19,7 +19,7 @@
         <div class="box">
             @if (count($debts))
                 <div class="box__section box__section--header row">
-                    <div class="row__column row__column--compact mr-2" style="width: 20px;"></div>
+
                     <div class="row__column">{{ __('fields.type') }}</div>
                     <div class="row__column">{{ __('fields.amount') }}</div>
                     <div class="row__column">{{ __('fields.description') }}</div>
@@ -29,11 +29,10 @@
                 @foreach ($debts as $debt)
                     <div class="box__section row">
 
-                        <div class="row__column row__column--compact row__column--middle mr-2">
-                            {{ ++$i }}
-                        </div>
-                        <div class="row__column row__column--middle" v-pre>{{ $debt->type }}</div>
-                        <div class="row__column row__column--middle" v-pre><a
+
+                        <div class="row__column row__column--middle" v-pre>{{ $debt->getTypeName() }}</div>
+                        <div class="row__column row__column--middle" v-pre>
+                            <a style="color:{{$debt->getColorAmount()}}"
                                 href="{{ route('debts.show', $debt->id) }}">{{ $debt->amount }} </a></div>
                         <div class="row__column row__column--middle" v-pre>
                             {{ $debt->Who }}<br>

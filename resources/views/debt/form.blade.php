@@ -5,7 +5,8 @@
         <label>{{ __('fields.type') }}</label>
         <select name="type">
             @foreach ($typeDebts as $id => $name)
-                <option value="{{ $id }}" v-pre>{{ $name }}</option>
+                <option value="{{ $id }}" v-pre @if ($debt?->type == $id)@selected(true)
+                @endif>{{ $name }}</option>
             @endforeach
         </select>
         @include('partials.validation_error', ['payload' => 'type'])

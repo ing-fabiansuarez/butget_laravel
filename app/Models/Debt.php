@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TypeDebts;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -42,5 +43,33 @@ class Debt extends Model
         return $this->hasMany(\App\Models\debtDetails::class, 'id', 'debt_id');
     }
 
+    public function getColorAmount(): String
+    {
+        switch ($this->type) {
+            case TypeDebts::I_LEND->getId():
+                return "#00FF00";
+                break;
+            case TypeDebts::LEND_ME->getId():
+                return "#FF0000";
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
+
+    public function getTypeName():String{
+        switch ($this->type) {
+            case TypeDebts::I_LEND->getId():
+                return TypeDebts::I_LEND->getName();
+                break;
+            case TypeDebts::LEND_ME->getId():
+                return TypeDebts::LEND_ME->getName();
+                break;
+            default:
+                return null;
+                break;
+        }
+    }
 
 }
