@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\TypeDebts;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Node\Expr\Cast\Double;
 
 /**
  * Class Debt
@@ -27,6 +28,8 @@ class Debt extends Model
 
     protected $perPage = 20;
 
+
+
     /**
      * Attributes that should be mass-assignable.
      *
@@ -40,25 +43,16 @@ class Debt extends Model
      */
     public function debtDetails()
     {
-        return $this->hasMany(\App\Models\debtDetails::class, 'id', 'debt_id');
+        return $this->hasMany(DebtDetail::class);
     }
 
-    public function getColorAmount(): String
-    {
-        switch ($this->type) {
-            case TypeDebts::I_LEND->getId():
-                return "#00FF00";
-                break;
-            case TypeDebts::LEND_ME->getId():
-                return "#FF0000";
-                break;
-            default:
-                return null;
-                break;
-        }
+    public function getTypeEnum(): TypeDebts{
+
+        return TypeDebts::fromId($this->type);
     }
 
-    public function getTypeName():String{
+
+    public function getTypeName() : String{
         switch ($this->type) {
             case TypeDebts::I_LEND->getId():
                 return TypeDebts::I_LEND->getName();
@@ -70,6 +64,19 @@ class Debt extends Model
                 return null;
                 break;
         }
+    }
+
+    public function getTotalPayments(): float
+    {
+        return $this->debtDetails()->sum('amount');
+    }
+
+    public function getTotalBalance(): float
+    {
+        $totalPayments = $this->getTotalPayments();
+        $totalBalance = $this->amount - $totalPayments;
+
+        return $totalBalance;
     }
 
 }

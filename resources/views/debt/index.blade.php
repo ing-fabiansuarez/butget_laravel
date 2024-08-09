@@ -32,8 +32,62 @@
 
                         <div class="row__column row__column--middle" v-pre>{{ $debt->getTypeName() }}</div>
                         <div class="row__column row__column--middle" v-pre>
-                            <a style="color:{{$debt->getColorAmount()}}"
-                                href="{{ route('debts.show', $debt->id) }}">{{ $debt->amount }} </a></div>
+
+                            <a href="{{ route('debts.show', $debt->id) }}">
+
+                                <label
+                                    style="color: @switch($debt->type)
+                                        @case(\App\Enums\TypeDebts::I_LEND->getId())
+                                            #FF0000
+                                        @break
+                                        @case(\App\Enums\TypeDebts::LEND_ME->getId())
+                                            #00FF00
+                                        @break
+                                    @endswitch">
+                                    Total:
+                                    @switch($debt->type)
+                                        @case(\App\Enums\TypeDebts::I_LEND->getId())
+                                            <i class="fas fa-arrow-alt-right fa-sm"></i>
+                                        @break
+
+                                        @case(\App\Enums\TypeDebts::LEND_ME->getId())
+                                            <i class="fas fa-arrow-alt-left fa-sm"></i>
+                                        @break
+
+                                        @default
+                                    @endswitch
+                                    {{ $debt->amount }} </label>
+                                <br>
+                                <label
+                                    style="color: @switch($debt->type)
+                                        @case(\App\Enums\TypeDebts::I_LEND->getId())
+                                             #00FF00
+                                        @break
+                                        @case(\App\Enums\TypeDebts::LEND_ME->getId())
+                                            #FF0000
+                                        @break
+                                    @endswitch">
+                                    Abono:
+                                    @switch($debt->type)
+                                        @case(\App\Enums\TypeDebts::I_LEND->getId())
+                                            <i class="fas fa-arrow-alt-left fa-sm"></i>
+                                        @break
+
+                                        @case(\App\Enums\TypeDebts::LEND_ME->getId())
+                                            <i class="fas fa-arrow-alt-right fa-sm"></i>
+                                        @break
+
+                                        @default
+                                    @endswitch
+                                    {{ $debt->getTotalPayments() }} </label><br>
+                                <label>
+                                    Saldo:
+                                    {{ $debt->getTotalBalance() }} </label>
+
+
+
+                            </a>
+                        </div>
                         <div class="row__column row__column--middle" v-pre>
                             {{ $debt->Who }}<br>
                             {{ $debt->due_date }}<br>

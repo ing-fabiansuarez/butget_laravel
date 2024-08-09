@@ -5,6 +5,7 @@ use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\DebtDetailController;
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\IndexController;
@@ -80,7 +81,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/tags', TagController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('/debts',DebtController::class);
+    Route::resource('/debts',DebtController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy','show']);
+
+    Route::get('/debts/{debt}/debt-details/create', [DebtController::class,'createDetail'])->name('debt-details.create');
+    Route::post('/debts/{debt}/debt-details/store', [DebtController::class,'storeDetail'])->name('debt-details.store');
+    Route::delete('/debts/{debt}/debt-details/{debtDetail}/destroy', [DebtController::class,'destroyDetail'])->name('debt-details.destroy');
+
 
     Route::name('reports.')->group(function () {
         Route::get('/reports', [ReportController::class, 'index'])->name('index');

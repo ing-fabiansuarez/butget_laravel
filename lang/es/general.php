@@ -34,5 +34,6 @@ return [
     'invited_to' => 'Tú has invitado a',
     'sent_by' => 'Enviado por',
 
-    'of' => 'de'
+    'of' => 'de',
+    'crear_registro_deuda'=>'Crear Un Registro En Deuda',
 ];
