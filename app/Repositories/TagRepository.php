@@ -21,8 +21,14 @@ class TagRepository
         return Tag::find($id);
     }
 
-    public function getMostExpensiveTags(int $spaceId, int $limit = null, int $year = null, int $month = null)
-    {
+    public function getMostExpensiveTags(
+        int $spaceId,
+        int $limit = null,
+        int $year = null,
+        int $month = null,
+        string $startDate = null,
+        string $endDate = null
+    ) {
         $sql = '
             SELECT
                 tags.name AS name,
@@ -36,11 +42,19 @@ class TagRepository
                 tags.space_id = ?';
 
         if ($year) {
-            $sql .= ' AND YEAR(happened_on) = ?';
+            $sql .= ' AND YEAR(spendings.happened_on) = ?';
         }
 
         if ($month) {
-            $sql .= ' AND MONTH(happened_on) = ?';
+            $sql .= ' AND MONTH(spendings.happened_on) = ?';
+        }
+
+        if ($startDate && $endDate) {
+            $sql .= ' AND spendings.happened_on BETWEEN ? AND ?';
+        } elseif ($startDate) {
+            $sql .= ' AND spendings.happened_on >= ?';
+        } elseif ($endDate) {
+            $sql .= ' AND spendings.happened_on <= ?';
         }
 
         $sql .= '
@@ -64,8 +78,20 @@ class TagRepository
             $data[] = $month;
         }
 
+        if ($startDate && $endDate) {
+            $data[] = $startDate;
+            $data[] = $endDate;
+        } elseif ($startDate) {
+            $data[] = $startDate;
+        } elseif ($endDate) {
+            $data[] = $endDate;
+        }
+
         return DB::select($sql . ';', $data);
     }
+
+
+
 
     public function create(int $spaceId, string $name, string $color): Tag
     {
