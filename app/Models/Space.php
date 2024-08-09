@@ -69,7 +69,7 @@ class Space extends Model
     // Accessors
     protected function abbreviatedName(): Attribute
     {
-        return Attribute::make(fn () => Str::limit($this->name, 3));
+        return Attribute::make(fn() => Str::limit($this->name, 3));
     }
 
     //
@@ -91,6 +91,25 @@ class Space extends Model
             return $earningsAmount - $spendingsAmount;
         }
     }
+
+    public function generalBalance()
+    {
+        // Suma de todos los ingresos para este espacio
+        $earningsAmount = Earning::where('space_id', $this->id)
+            ->sum('amount');
+
+        // Suma de todos los gastos para este espacio
+        $spendingsAmount = Spending::where('space_id', $this->id)
+            ->sum('amount');
+
+        // Calcular el balance general
+        if (!$spendingsAmount) {
+            return $earningsAmount;
+        } else {
+            return $earningsAmount - $spendingsAmount;
+        }
+    }
+
 
     public function monthlyRecurrings($year, $month)
     {

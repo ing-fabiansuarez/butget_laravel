@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $space_id = session('space_id');
         $currentYear = date('Y');
         $currentMonth = date('m');
+        //Esta fucion me dice cuanto dias hay en un mes en especifico.
         $daysInMonth = cal_days_in_month(CAL_GREGORIAN, $currentMonth, $currentYear);
 
         $mostExpensiveTags = $this->tagRepository->getMostExpensiveTags($space_id, 3, $currentYear, $currentMonth);

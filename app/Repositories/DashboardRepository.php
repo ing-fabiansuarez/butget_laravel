@@ -11,7 +11,7 @@ class DashboardRepository
 {
     public function getBalance(string $year, string $month)
     {
-        return Space::find(session('space_id'))->monthlyBalance($year, $month);
+        return Space::find(session('space_id'))->generalBalance();
     }
 
     public function getRecurrings(string $year, string $month)
