@@ -77,6 +77,11 @@
                                     class="hidden ml-05">{{ __('models.tags') }}</span></a>
                         </li>
                         <li>
+                            <a href="{{ route('debts.index') }}" {!! Request::path() == 'debts' ? 'class="active"' : '' !!}><i
+                                    class="fas fa-money-bill-alt fa-sm color-red"></i> <span
+                                    class="hidden ml-05">{{ __('models.debts') }}</span></a>
+                        </li>
+                        <li>
                             <a href="{{ route('reports.index') }}" {!! Request::path() == 'reports' ? 'class="active"' : '' !!}><i
                                     class="fas fa-chart-line fa-sm color-green"></i> <span
                                     class="hidden ml-05">{{ __('pages.reports') }}</span></a>

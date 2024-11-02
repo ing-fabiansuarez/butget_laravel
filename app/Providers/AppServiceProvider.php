@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Space;
+use App\Repositories\DebtRepository;
+use App\Repositories\ORMDebtRepository;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 use Auth;
@@ -30,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
 
     public function register()
     {
-        //
+        $this->app->bind(DebtRepository::class, ORMDebtRepository::class);
     }
 }

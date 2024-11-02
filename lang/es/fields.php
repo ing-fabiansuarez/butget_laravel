@@ -23,5 +23,10 @@ return [
 
     'color' => 'Color',
 
-    'role' => 'Rol'
+    'role' => 'Rol',
+
+    'type'=>'Tipo',
+    'due_date'=>'Fecha de vencimiento',
+    'Who'=>'¿Quien?',
+    'who'=>'¿Quien?'
 ];
