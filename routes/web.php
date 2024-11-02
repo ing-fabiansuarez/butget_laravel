@@ -47,13 +47,15 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/resend-verification-mail', ResendVerificationMailController::class)->name('resend_verification_mail');
 
-    Route::name('attachments.')->group(function() {
+    Route::name('attachments.')->group(function () {
         Route::post('/attachments', [AttachmentController::class, 'store'])->name('store');
         Route::get('/attachments/{attachment}/download', [AttachmentController::class, 'download'])->name('download');
         Route::post('/attachments/{id}/delete', [AttachmentController::class, 'delete'])->name('destroy');
     });
 
+    Route::get('/livewire', [TransactionController::class, 'createLivewire']);
     Route::resource('/transactions', TransactionController::class)->only(['index', 'create']);
+
 
     Route::name('earnings.')->group(function () {
         Route::get('/earnings/{earning}', [EarningController::class, 'show'])->name('show');
@@ -81,11 +83,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/tags', TagController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 
-    Route::resource('/debts',DebtController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy','show']);
+    Route::resource('/debts', DebtController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy', 'show']);
 
-    Route::get('/debts/{debt}/debt-details/create', [DebtController::class,'createDetail'])->name('debt-details.create');
-    Route::post('/debts/{debt}/debt-details/store', [DebtController::class,'storeDetail'])->name('debt-details.store');
-    Route::delete('/debts/{debt}/debt-details/{debtDetail}/destroy', [DebtController::class,'destroyDetail'])->name('debt-details.destroy');
+    Route::get('/debts/{debt}/debt-details/create', [DebtController::class, 'createDetail'])->name('debt-details.create');
+    Route::post('/debts/{debt}/debt-details/store', [DebtController::class, 'storeDetail'])->name('debt-details.store');
+    Route::delete('/debts/{debt}/debt-details/{debtDetail}/destroy', [DebtController::class, 'destroyDetail'])->name('debt-details.destroy');
 
 
     Route::name('reports.')->group(function () {
@@ -140,6 +142,6 @@ Route::get('/verify/{token}', VerifyController::class)->name('verify');
 Route::prefix('prototype')
     ->middleware(CheckIfSpaPrototypeIsEnabled::class)
     ->group(function () {
-        Route::get('/', fn () => 'Hello world');
+        Route::get('/', fn() => 'Hello world');
         Route::get('/{any}', \App\Http\Controllers\PrototypeController::class)->where('any', '.*');
     });
